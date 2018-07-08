@@ -7,8 +7,11 @@ from django.shortcuts import render
 from .forms import *
 from .models import *
 
+# ajax 请求反馈
 ok = json.dumps({'resp': 'ok'})
 no = json.dumps({'resp': 'no'})
+
+# 登录处理视图
 
 
 def login_views(request):
@@ -41,7 +44,7 @@ def login_views(request):
                 if pwd == obj.pwd:
                     request.session['user'] = name
                     resp = HttpResponseRedirect('/main/')
-                    resp.set_cookie('user', name, expires=60*60*24*7)
+                    resp.set_cookie('user', name, expires=60 * 60 * 24 * 7)
                     return resp
                 else:
                     err = '密码有误, 请重试!'
@@ -52,6 +55,7 @@ def login_views(request):
             return render(request, 'login.html', locals())
 
 
+# 注册处理视图
 def register_views(request):
     if request.method == 'GET':
         form = RegisterForm()
@@ -78,22 +82,24 @@ def register_views(request):
                 obj.save()
                 request.session['user'] = name
                 resp = HttpResponseRedirect('/main/')
-                resp.set_cookie('user', name, expires=60*60*24*7)
+                resp.set_cookie('user', name, expires=60 * 60 * 24 * 7)
                 return resp
         else:
             return render(request, 'register.html', locals())
 
 
+# 主页处理视图
 def mainpage_views(request):
     all_list = messages()
-    username = request.COOKIES.get('user','未登录')
+    username = request.COOKIES.get('user', '未登录')
     if not username:
-        username = request.session.get('user','未登录')
+        username = request.session.get('user', '未登录')
         if not username:
             username = '未登录'
     return render(request, 'main.html', locals())
 
 
+# 详情页处理视图
 def detail_views(request):
     if request.method == 'POST':
         global msg_id
@@ -107,7 +113,7 @@ def detail_views(request):
             author = obj.users.uname
             public_time = obj.public_time
             coms = Comment.objects.filter(message_id=msg_id)
-        except:
+        except BaseException:
             return HttpResponseRedirect('/main/')
         else:
             comments = []
@@ -128,6 +134,7 @@ def detail_views(request):
                     return HttpResponseRedirect('/login')
 
 
+# 点赞转发评论处理视图, 前端通过ajax提交
 def deal_views(request):
     atype = request.POST.get('type')
     username = request.POST.get('username')
@@ -144,7 +151,7 @@ def deal_views(request):
                 obj.agree_num = 1
             adic = {
                 'users': Users.objects.get(uname=username),
-                'message' : obj
+                'message': obj
             }
             Collection(**adic).save()
             obj.save()
@@ -165,7 +172,7 @@ def deal_views(request):
                     else:
                         obj.transpond_num = 1
                     obj.save()
-                    tdic ={
+                    tdic = {
                         'users': Users.objects.get(uname=username),
                         'content': obj.content,
                         'picture': obj.picture,
@@ -174,7 +181,7 @@ def deal_views(request):
                     Message(**tdic).save()
                     ttdic = {
                         'users': Users.objects.get(uname=username),
-                        'message' : obj
+                        'message': obj
                     }
                     Transpond(**ttdic).save()
                     return HttpResponse(ok)
@@ -192,6 +199,8 @@ def deal_views(request):
         Comment(**cdic).save()
         return HttpResponse(ok)
 
+# 用户点击退出登录的处理缓存登录状态的视图
+
 
 def del_views(request):
     atype = request.POST.get('type')
@@ -203,6 +212,7 @@ def del_views(request):
         return resp
 
 
+# 发布新微博的处理视图
 def publish_views(request):
     if request.method == 'GET':
         username = request.COOKIES.get('user', None)
@@ -239,6 +249,7 @@ def publish_views(request):
             return HttpResponseRedirect('/publish/')
 
 
+# 获取微博列表的方法
 def messages():
     all_list = []
     message = Message.objects.all()

@@ -25,11 +25,12 @@ SECRET_KEY = '719fxie96faw(p388(duf&^s83nz=vrb_uo7_2)s^j(85t$!18'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# 访问地址修改为所有
 ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
+# 注册应用
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -76,6 +77,7 @@ WSGI_APPLICATION = 'microblog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+# 数据库配置
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -109,9 +111,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
-
+# 修改语言为简体中文
 LANGUAGE_CODE = 'zh-Hans'
 
+# 时区为东八区
 TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
@@ -124,14 +127,10 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+# 静态文件存储路径及访问路径
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (BASE_DIR, 'static')
 
+# 设置session 的存储时间
 SESSION_COOKIE_AGE = 60*10*60
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
-CACHE_MIDDLEWARE_ALIAS = 'default'    #用来存储的缓存别名
-CACHE_MIDDLEWARE_SECONDS = 0  # 所有页面默认缓存时间,默认600
-# 当多个站点使用同一个配置的时候，这个可以设置可以避免发生冲突,一般设置为网站域名
-CACHE_MIDDLEWARE_KEY_PREFIX ='localhost'
-CACHE_MIDDLEWARE_ANONYMOUS_ONLY = False #那么只有匿名的请求会被缓存

@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^login/$', login_views),
     url(r'^publish/$', publish_views, name='publishPage'),
     url(r'^main/$', mainpage_views, name='mainPage'),
-    url(r'^detail/', detail_views)
+    url(r'^detail/', detail_views),
+    url(r'^', mainpage_views),
 ]

@@ -81,7 +81,7 @@ $(function () {
         if ($("#welcome").html()=='未登录'){
             location.href = '/login';
         }else{
-            location.href='/';
+            location.href='/main';
         }
     });
     $('#logout').click(function () {
