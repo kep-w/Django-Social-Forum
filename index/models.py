@@ -1,6 +1,7 @@
 from django.db import models
 
 
+# 用户表
 class Users(models.Model):
     uname = models.CharField(max_length=30)
     pwd = models.CharField(max_length=40)
@@ -17,6 +18,8 @@ class Users(models.Model):
         verbose_name = '用户'
         verbose_name_plural = verbose_name
 
+
+# 用户详细信息表
 class User_Info(models.Model):
     users = models.ForeignKey(Users)
     avatar = models.ImageField(upload_to='images/avatar', default=None, null=True)
@@ -28,7 +31,7 @@ class User_Info(models.Model):
     blogurl = models.URLField(null=True)
 
     def __str__(self):
-        return self.users.get('uname',None)
+        return self.users.get('uname', None)
 
     class Meta:
         db_table = 'info'
@@ -36,6 +39,7 @@ class User_Info(models.Model):
         verbose_name_plural = verbose_name
 
 
+# 用户个人标签表
 class UserLabel(models.Model):
     label = models.CharField(max_length=50)
     users = models.ManyToManyField(Users)
@@ -49,6 +53,7 @@ class UserLabel(models.Model):
         verbose_name_plural = verbose_name
 
 
+# 用户发布微博表
 class Message(models.Model):
     users = models.ForeignKey(Users)
     content = models.CharField(max_length=300)
@@ -71,6 +76,7 @@ class Message(models.Model):
         verbose_name_plural = verbose_name
 
 
+# 用户评论表
 class Comment(models.Model):
     users = models.ForeignKey(Users)
     message = models.ForeignKey(Message)
@@ -87,6 +93,7 @@ class Comment(models.Model):
         verbose_name_plural = verbose_name
 
 
+# 用户点赞表
 class Collection(models.Model):
     users = models.ForeignKey(Users)
     message = models.ForeignKey(Message)
@@ -102,6 +109,7 @@ class Collection(models.Model):
         verbose_name_plural = verbose_name
 
 
+# 用户转发表
 class Transpond(models.Model):
     users = models.ForeignKey(Users)
     message = models.ForeignKey(Message)

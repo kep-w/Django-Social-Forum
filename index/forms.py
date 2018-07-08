@@ -1,7 +1,11 @@
+'''
+根据数据库字段自动生成页面表单的处理模块
+'''
 from django import forms
 from .models import *
 
 
+# 登录表单
 class LoginForm(forms.ModelForm):
     class Meta:
         model = Users
@@ -26,6 +30,7 @@ class LoginForm(forms.ModelForm):
         }
 
 
+# 注册表单
 class RegisterForm(forms.ModelForm):
     class Meta:
         model = Users

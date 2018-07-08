@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+# 路由配置, 除了admin 其他都分配到index应用的urls处理
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('index.urls')),
