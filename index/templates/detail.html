@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Details
+{% endblock %}
+
+{%block head %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+    <script>
+        $(function () {
+            $.ajaxSetup({
+                data: {csrfmiddlewaretoken: '{{ csrf_token }}' }
+            })
+        });
+    </script>
+    <script src="{% static 'js/main.js' %}"></script>
+{% endblock %}
+
+{% block menu %}
+    <ul class="toplinks">
+        <li><a href="{% url 'mainPage' %}">Microblog</a></li>
+        <li><a href="{% url 'publishPage' %}">Publish</a></li>
+        <li id="welcome">{{ username }}</li>
+        <input type="hidden" id="username" value="{{ username }}">
+        <script>
+            console.log('用户名'+document.getElementById('username').value)
+        </script>
+        <li id="logout"></li>
+    </ul>
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block form %}
+    <div id="dblog">
+        <table class="content">
+            <tr>
+                <td class="au">{{ author }}</td>
+                <td>{{ public_time }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="content">
+                    {{ content }}
+                </td>
+            </tr>
+            {% for c in comments %}
+                <tr>
+                    <td colspan="2" class="comment">
+                        {{ c.cauthor }}&nbsp;&nbsp;&nbsp;&nbsp;
+                        {{ c.comment_time }}
+                        <br>
+                        {{ c.content }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
