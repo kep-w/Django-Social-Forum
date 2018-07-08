@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Microblog
+{% endblock %}
+
+{%block head %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script>
+        $(function () {
+            $.ajaxSetup({
+                data: {csrfmiddlewaretoken: '{{ csrf_token }}' }
+            })
+        });
+    </script>
+    <script src="{% static 'js/main.js' %}"></script>
+{% endblock %}
+
+{% block menu %}
+    <ul class="toplinks">
+        <li><a href="{% url 'mainPage' %}">Microblog</a></li>
+        <li><a href="{% url 'publishPage' %}">Publish</a></li>
+        <li id="welcome">{{ username }}</li>
+        <input type="hidden" id="username" value="{{ username }}">
+        <li id="logout"></li>
+    </ul>
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block form %}
+    <ul id="blog">
+        {% for msg in all_list %}
+        <li>
+            <table class="content">
+                <tr>
+                    <td class="td-control">{{ msg.author }}</td>
+                    <td>{{ msg.public_time }}</td>
+                    <td>{{ msg.label }}</td>
+
+                </tr>
+                <tr>
+                    <td colspan="3" class="msg">
+                        {{ msg.content }}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <input type="hidden" value="{{ msg.picture }}">
+                        {% if msg.picture %}
+                            <img src="{% static '/images/msgPicture/' %}{{ msg.picture }}" alt="" id="blogPic">
+                        {% else %}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="agree">
+                        <span>点赞</span>
+                        <span class="num">
+                        {% if msg.agree_num %}
+                            {{ msg.agree_num }}
+                        {% else %}
+
+                        {% endif %}
+                        </span>
+                    </td>
+                    <input type="hidden" value="{{ msg.id }}" class="msg_id">
+                    <td class="transpond">
+                        <span>转发</span>
+                        <span class="num">
+                        {% if msg.transpond_num %}
+                            {{ msg.transpond_num }}
+                        {% else %}
+
+                        {% endif %}
+                        </span>
+                    </td>
+                    <td class="comment">
+                        <span>评论</span>
+                        <span class="num">
+                        {% if msg.comment_num %}
+                            {{ msg.comment_num }}
+                        {% else %}
+
+                        {% endif %}
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

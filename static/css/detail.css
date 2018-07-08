@@ -1,0 +1,38 @@
+*{
+    margin:0px;
+    padding:0px;
+    list-style:none;
+    font-size: 18px;
+}
+#welcome, #logout{
+    margin-left: 200px;
+    color: #fff;
+    font-size: 20px;
+    line-height: 60px;
+}
+#welcome:hover, #logout:hover{
+    cursor: pointer ;
+    color: lavenderblush;
+    font-size: 22px;
+}
+#logout{
+    font-size: 18px;
+    margin-left: 40px;
+}
+#dblog{
+    width:90%;
+    margin:30px auto;
+    text-align: left;
+}
+#dblog td{
+    padding: 5px 0px;
+}
+.au{
+    font-size: 22px;
+}
+#dblog .content{
+    border-bottom: 1px solid #50a3a2;
+}
+#dblog .comment{
+    font-size: 16px;
+}

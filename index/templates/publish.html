@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Public Your Microblog
+{% endblock %}
+
+{%block head %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/publish.css' %}">
+    <script>
+        $(function () {
+            $.ajaxSetup({
+                data: {csrfmiddlewaretoken: '{{ csrf_token }}' }
+            })
+        });
+    </script>
+    <script src="{% static 'js/publish.js' %}"></script>
+{% endblock %}
+
+{% block menu %}
+    <ul class="toplinks">
+        <li><a href="{% url 'mainPage' %}">Microblog</a></li>
+        <li><a href="{% url 'publishPage' %}">Publish</a></li>
+        <li id="welcome">{{ username }}</li>
+        <input type="hidden" id="username" value="{{ username }}">
+        <li id="logout"></li>
+    </ul>
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block form %}
+    <form action="/publish/" method="post" enctype="multipart/form-data" name="pub" id="testForm">
+        {% csrf_token %}
+        <div id="pblog">
+        <table class="content">
+            <tr class="label">
+                <td colspan="2">
+                    <span>添加标签</span>
+                    <input type="hidden" value="{{ username }}" name="user">
+                    <input name="label" type="text" maxlength="8" placeholder="长度不得超过8个字">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <textarea name="mblog" id="mblog" placeholder="Input Your Microblog Here!"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="button" value="上传照片" onclick="document.pub.picpath.click()" class="upload">
+                    <span>
+                        <input type="file" name="picpath" style="display:none;" onChange="document.pub.path.value=this.value">
+                        <input name="path" readonly class="picpath">
+                    </span>
+                </td>
+            </tr>
+            <tr class="pbtn">
+                <td>
+                    <input type="reset" value="取消">
+                </td>
+                <td>
+                    <input type="submit" value="提交" id="sub">
+                </td>
+            </tr>
+        </table>
+        </div>
+    </form>
+{% endblock %}

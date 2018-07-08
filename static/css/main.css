@@ -1,0 +1,70 @@
+*{
+    margin:0px;
+    padding:0px;
+    list-style:none;
+    font-size: 16px;
+}
+#blog{
+    width:90%;
+    margin:30px auto;
+}
+#blog>li{
+    margin:0px auto 40px 0px;
+}
+#blog .content{
+    width:100%;
+    border-bottom:2px solid darkgray;
+}
+#blog .content:hover{
+    cursor: pointer;
+    color: #50a3a2;
+ }
+#blog td{
+    text-align: left;
+    width: 33%;
+}
+#blog .msg{
+    height: 70%;
+    font-size: 16px;
+}
+#blog .td-control{
+    font-size: 20px;
+}
+.toplinks a{
+    text-decoration: none;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0px 20px;
+    width: 100px;
+    height: 60px;
+    line-height: 60px;
+    color: #fff;
+    font-size: 22px;
+}
+#welcome, #logout{
+    margin-left: 200px;
+    color: #fff;
+    font-size: 20px;
+    line-height: 60px;
+}
+#welcome:hover, #logout:hover, .toplinks a:hover{
+    cursor: pointer ;
+    color: lavenderblush;
+    font-size: 22px;
+}
+#logout{
+    font-size: 18px;
+    margin-left: 40px;
+}
+.agree>span:hover, .transpond>span:hover, .comment>span:hover{
+    cursor: pointer;
+    color: cadetblue;
+    font-size: 20px;
+}
+.num{
+    font-size: 20px;
+    margin-left: 5px;
+}
+#blog #blogPic{
+    max-width: 300px;
+}

@@ -1,0 +1,35 @@
+*{
+    margin:0px;
+    padding:0px;
+    list-style:none;
+    font-size: 16px;
+    padding-left: 20px;
+}
+#pblog .content{
+    width:100%;
+    text-align: left;
+}
+#pblog .content #mblog{
+    border:1px solid #50a3a2;
+    border-radius: 5px;
+    padding: 20px 20px;
+    margin-left:10px;
+    width: 90%;
+    height: 200px;
+    vertical-align: top;
+}
+#pblog .label td{
+    font-size: 18px;
+}
+#pblog .upload{
+    width: 150px;
+    padding: 0px;
+    text-align: center;
+}
+#pblog .picpath{
+    border:none;
+    color:#50a3a2;
+}
+#pblog .pbtn{
+    width: 150px;
+}

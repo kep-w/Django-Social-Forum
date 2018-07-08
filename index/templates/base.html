@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            Microblog
+        {% endblock %}
+    </title>
+    <link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet"
+            type="text/css">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/prettify.css' %}">
+    <script src="{% static 'js/jquery-1.11.3.js'%}" type="text/javascript"></script>
+    {%block head %}
+    {% endblock %}
+</head>
+<body>
+    <nav id="head">
+      <div class="container">
+        <h1>Microblog</h1>
+        <div id="menu">
+            {% block menu %}
+            {% endblock %}
+        </div>
+        <a id="menu-toggle" href="#" class="">&#9776;</a> </div>
+    </nav>
+    {% block header %}
+    <header>
+      <div class="container">
+        <h2 class="docs-header"> This is your Microblog</h2>
+      </div>
+    </header>
+    {% endblock %}
+    <div class="container contWrap">
+        {% block form %}
+        {% endblock %}
+    </div>
+    <footer id="btm">
+          <div class="container">
+                <p>&copy;2018 Kepner | <a href="https://github.com/kep-w" target="_blank" title="Kep-wu">Github</a></p>
+          </div>
+    </footer>
+</body>
+</html>
