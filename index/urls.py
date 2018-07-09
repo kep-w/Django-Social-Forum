@@ -9,5 +9,5 @@ urlpatterns = [
     url(r'^publish/$', publish_views, name='publishPage'),
     url(r'^main/$', mainpage_views, name='mainPage'),
     url(r'^detail/', detail_views),
-    url(r'^/$', mainpage_views),
+    url(r'^', mainpage_views),
 ]
