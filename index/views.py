@@ -96,7 +96,6 @@ def mainpage_views(request):
         username = request.session.get('user', '未登录')
         if not username:
             username = '未登录'
-    print(all_list)
     return render(request, 'main.html', locals())
 
 
