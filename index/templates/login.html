@@ -2,32 +2,25 @@
 {% load static %}
 
 {% block title %}
-    登录
+    Login
 {% endblock %}
 
 {%block head %}
-
+    <script src="{% static 'js/login.js' %}"></script>
 {% endblock %}
 
 {% block menu %}
 {% endblock %}
 
 {% block form %}
-    <form action="/login/" method="post">{% csrf_token %}
+    <form action="{% url 'login' %}" method="post" id="submit">{% csrf_token %}
         {{form.as_p}}
         <p class="tip">
             {{ err }}
         </p>
         <p>
             <button type="submit" id="sbm">登录</button>
-            <a href="/register/" class="btn">注册</a>
+            <a href="{% url 'register' %}" class="btn">注册</a>
         </p>
     </form>
-    <script>
-        $(function () {
-            $('#sbm').submit(function () {
-                console.log($('#id_name').val())
-            })
-        })
-    </script>
 {% endblock %}

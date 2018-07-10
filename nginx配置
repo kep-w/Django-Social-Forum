@@ -1,0 +1,15 @@
+#nginx静态服务器开始
+upstream www.pbase.xyz{
+    server 127.0.0.1:8000;
+}
+server {
+    listen 80;
+    server_name www.pbase.xyz;
+    #proxy_redirect off;
+    proxy_set_header   X-Real-IP $remote_addr;
+    proxy_set_header   X-Forwarded-For  $remote_addr;
+    proxy_set_header   X-Forwarded-Host $server_name;
+    location / {
+        proxy_pass   http://www.pbase.xyz;
+    }
+}
