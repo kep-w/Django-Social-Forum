@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.cache.UpdateCacheMiddleware', # 浏览器cache-control更新,必须放在第一个
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware', # 浏览器cache-control获取,必须放在最后一个
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'microblog.urls'
@@ -132,5 +132,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (BASE_DIR, 'static')
 
 # 设置session 的存储时间
-SESSION_COOKIE_AGE = 60*10*60
+SESSION_COOKIE_AGE = 60 * 10 * 60
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+CACHE_MIDDLEWARE_SECONDS = 0
+
+CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True

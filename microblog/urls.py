@@ -17,7 +17,10 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 # 路由配置, 除了admin 其他都分配到index应用的urls处理
+from index.views import mainpage_views
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('index.urls')),
+    url(r'^user/', include('index.urls')),
+    url(r'^$', mainpage_views, name='mainPage'),
 ]

@@ -21,7 +21,7 @@ def login_views(request):
         user = request.COOKIES.get('user', None)
         if user:
             request.session['user'] = user
-            return HttpResponseRedirect('/main/')
+            return HttpResponseRedirect('/')
         else:
             request.session['user'] = None
             return render(request, 'login.html', locals())
@@ -43,7 +43,7 @@ def login_views(request):
             else:
                 if pwd == obj.pwd:
                     request.session['user'] = name
-                    resp = HttpResponseRedirect('/main/')
+                    resp = HttpResponseRedirect('/')
                     resp.set_cookie('user', name, expires=60 * 60 * 24 * 7)
                     return resp
                 else:
@@ -62,7 +62,7 @@ def register_views(request):
         user = request.COOKIES.get('user', None)
         if user:
             request.session['user'] = user
-            resp = HttpResponseRedirect('/main/')
+            resp = HttpResponseRedirect('/')
         else:
             resp = render(request, 'register.html', locals())
         return resp
@@ -81,7 +81,7 @@ def register_views(request):
                 obj = Users(**data)
                 obj.save()
                 request.session['user'] = name
-                resp = HttpResponseRedirect('/main/')
+                resp = HttpResponseRedirect('/')
                 resp.set_cookie('user', name, expires=60 * 60 * 24 * 7)
                 return resp
         else:
@@ -96,6 +96,7 @@ def mainpage_views(request):
         username = request.session.get('user', '未登录')
         if not username:
             username = '未登录'
+    print(all_list)
     return render(request, 'main.html', locals())
 
 
@@ -114,7 +115,7 @@ def detail_views(request):
             public_time = obj.public_time
             coms = Comment.objects.filter(message_id=msg_id)
         except BaseException:
-            return HttpResponseRedirect('/main/')
+            return HttpResponseRedirect('/')
         else:
             comments = []
             for c in coms:
@@ -131,7 +132,7 @@ def detail_views(request):
                 if username:
                     return render(request, 'detail.html', locals())
                 else:
-                    return HttpResponseRedirect('/login')
+                    return HttpResponseRedirect('/user/login/')
 
 
 # 点赞转发评论处理视图, 前端通过ajax提交
@@ -223,7 +224,7 @@ def publish_views(request):
             if username:
                 return render(request, 'publish.html', locals())
             else:
-                return HttpResponseRedirect('/login')
+                return HttpResponseRedirect('/user/login/')
     else:
         user = request.POST.get('user')
         if request.POST.get('mblog'):
@@ -244,9 +245,9 @@ def publish_views(request):
                 'picture': pic,
             }
             Message(**dic).save()
-            return HttpResponseRedirect('/main/')
+            return HttpResponseRedirect('/')
         else:
-            return HttpResponseRedirect('/publish/')
+            return HttpResponseRedirect('/user/publish/')
 
 
 # 获取微博列表的方法

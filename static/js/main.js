@@ -10,7 +10,7 @@ $(function () {
             var that = $(this);
             var msg_id = $(this).parent().find(".msg_id").val();
             $.ajax({
-                url:'/deal',
+                url:'/user/deal',
                 data:{'type':'agree','username':username,'msg_id':msg_id},
                 type:'post',
                 datatype:'json',
@@ -35,7 +35,7 @@ $(function () {
         var that = $(this);
         var msg_id = that.parent().find(".msg_id").val();
         $.ajax({
-            url:'/deal',
+            url:'/user/deal',
             data:{'type':'transpond','username':username,'msg_id':msg_id},
             type:'post',
             datatype:'json',
@@ -61,7 +61,7 @@ $(function () {
         var com = prompt('输入评论内容:')
         if (com) {
             $.ajax({
-                url: '/deal',
+                url: '/user/deal',
                 data: {'type': 'comment', 'username': username, 'msg_id': msg_id, 'comment_content':com},
                 type: 'post',
                 datatype: 'json',
@@ -79,21 +79,21 @@ $(function () {
     });
     $('#welcome').click(function () {
         if ($("#welcome").html()=='未登录'){
-            location.href = '/login';
+            location.href = '/user/login/';
         }else{
-            location.href='/main';
+            location.href='/';
         }
     });
     $('#logout').click(function () {
         if ($(this).text() == 'Signout'){
             // setCookie('user','');
             $.ajax({
-                url:'/del',
+                url:'/user/del',
                 data:{'type':'delSession','username': username},
                 type:'post',
                 datatype:'json',
                 success:function (data) {
-                    location.href = '/login/';
+                    location.href = '/user/login/';
                 },
                 error:function (data) {
                     console.log('错误信息',data.msg)
@@ -104,25 +104,16 @@ $(function () {
     $('.msg').click(function () {
         var msg_id = $(this).parent().parent().find(".msg_id").val();
         $.ajax({
-                url:'/detail/',
+                url:'/user/detail/',
                 data:{'type':'details','username': username, 'msg_id': msg_id,},
                 type:'post',
                 datatype:'json',
                 success:function (data) {
-                    location.href = '/detail/';
+                    location.href = '/user/detail/';
                 },
                 error:function (data) {
                     console.log('错误信息',data.msg)
                 }
             })
     });
-    function setCookie (name, value) {
-        var Days = 1;
-        var exp = new Date();
-        exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
-        document.cookie = name + '=' + encodeURI(value) + ';domain=;expires=' + exp.toGMTString() + ';path=/';
-    }
-    $('input').keyup(function () {
-
-    })
 });
