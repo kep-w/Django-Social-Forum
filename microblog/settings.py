@@ -129,7 +129,8 @@ USE_TZ = False
 
 # 静态文件存储路径及访问路径
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (BASE_DIR, 'static')
+STATIC_ROOT = '/home/tarena/microblog/static'
+# STATICFILES_DIRS = (BASE_DIR, 'static')
 
 # 设置session 的存储时间
 SESSION_COOKIE_AGE = 60 * 10 * 60
