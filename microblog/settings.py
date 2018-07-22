@@ -130,6 +130,17 @@ USE_TZ = False
 # 静态文件存储路径及访问路径
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (BASE_DIR, 'static')
+# # STATIC_ROOT = (BASE_DIR, 'static')
+# SITE_ROOT = os.path.join(os.path.abspath(os.path.dirname(__file__)), '..')
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(SITE_ROOT, 'static')
+# STATICFILES_DIRS = (
+#     # os.path.join(BASE_DIR,STATIC_URL),
+#     ('css', os.path.join(STATIC_ROOT, 'css').replace('\\', '/')),
+#     ('js', os.path.join(STATIC_ROOT, 'js').replace('\\', '/')),
+#     ('images', os.path.join(STATIC_ROOT, 'images').replace('\\', '/')),
+# )
+
 
 # 设置session 的存储时间
 SESSION_COOKIE_AGE = 60 * 10 * 60
