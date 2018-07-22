@@ -267,3 +267,7 @@ def messages():
             d['comment_num'] = m.comment_num
             all_list.insert(0, d)
     return all_list
+
+
+def page_not_found(request):
+    return HttpResponse('页面没找到')
