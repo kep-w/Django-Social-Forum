@@ -132,6 +132,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (BASE_DIR, 'static')
 # # STATIC_ROOT = (BASE_DIR, 'static')
 
+
 # 设置session 的存储时间
 SESSION_COOKIE_AGE = 60 * 10 * 60
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
