@@ -15,12 +15,24 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf import settings
+from django.views import static
 
 # 路由配置, 除了admin 其他都分配到index应用的urls处理
 from index.views import mainpage_views
+from .views import *
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^user/', include('index.urls')),
     url(r'^$', mainpage_views, name='mainPage'),
+    # 配置静态文件的映射
+    url(r'^static/(?P<path>.*)$', static.serve,
+        {'document_root': settings.STATICFILES_DIRS}, name='static'),
 ]
+
+
+handler403 = page_permission_denied
+handler404 = page_not_found
+handler500 = page_inter_error
